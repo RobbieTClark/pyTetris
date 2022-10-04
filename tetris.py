@@ -20,34 +20,38 @@ win = Tk()
 # Set the size of the tkinter window
 win.geometry("520x1020")
 win.resizable(width=0, height=0)
+win.title("Tetris")
 
 # Define a Canvas widget
 canvas = Canvas(win, width=500, height=1000, bg="black", highlightthickness=0)
 canvas.pack()
 
 # Add Images to Canvas widget
-image = ImageTk.PhotoImage(Image.open('blocks/purple_O.png'))
-img = canvas.create_image(0, 0, anchor=NW, image=image)
+image_0 = ImageTk.PhotoImage(Image.open('board_jpg/tetris_board.jpg'))
+img_0 = canvas.create_image(-30, -30, anchor=NW, image=image_0)
+
+image_1 = ImageTk.PhotoImage(Image.open('blocks_jpg/BlueBlock.jpg'))
+img_1 = canvas.create_image(6, 6, anchor=NW, image=image_1)
 
 def left(e):
-   x = -50
+   x = -20
    y = 0
-   canvas.move(img, x, y)
+   canvas.move(img_1, x, y)
 
 def right(e):
-   x = 50
+   x = 20
    y = 0
-   canvas.move(img, x, y)
+   canvas.move(img_1, x, y)
 
 def up(e):
    x = 0
-   y = -50
-   canvas.move(img, x, y)
+   y = -20
+   canvas.move(img_1, x, y)
 
 def down(e):
    x = 0
-   y = 50
-   canvas.move(img, x, y)
+   y = 20
+   canvas.move(img_1, x, y)
 
 # Bind the move function
 win.bind("<Left>", left)
