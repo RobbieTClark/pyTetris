@@ -18,32 +18,31 @@ from PIL import Image, ImageTk
 win = Tk()
 
 # Set the size of the tkinter window
-win.geometry("520x630")
+win.geometry("480x640")
 win.resizable(width=0, height=0)
 win.title("Tetris")
 #win.overrideredirect(1)
 
 # Define a Canvas widget
-canvas = Canvas(win, width=500, height=630, bg="black", highlightthickness=0)
+canvas = Canvas(win, width=480, height=640, bg="black", highlightthickness=0)
 canvas.pack()
 
 # Add Images to Canvas widget
-image_0 = ImageTk.PhotoImage(Image.open('board_png/tetris_board.png'))
-img_0 = canvas.create_image(-20, -20, anchor=NW, image=image_0)
+image_0 = ImageTk.PhotoImage(Image.open('board_png/tetris_board_blank.png'))
+img_0 = canvas.create_image(0, 0, anchor=NW, image=image_0) #-20,-20
 
-image_1 = ImageTk.PhotoImage(Image.open('L_block_png/0/BlueL.png'))
-img_1 = canvas.create_image(16, 16, anchor=NW, image=image_1)
+image_1 = ImageTk.PhotoImage(Image.open('blocks_png/BlueBlock150.png'))
+img_1 = canvas.create_image(21, 18, anchor=NW, image=image_1)
 
-image_bot = ImageTk.PhotoImage(Image.open('board_png/board_bottom.png'))
-
-
+# x = 21
+# y = 18
 
 # ls = []
 # ls_1 = []
 # for j in range (20):
 #    for i in range(10):
 #       ls.append(ImageTk.PhotoImage(Image.open('blocks_jpg/BlueBlock150.jpg')))
-#       ls_1.append(canvas.create_image(16 + (i * 30), 16  + (30 * j), anchor=NW, image=ls[i]))
+#       ls_1.append(canvas.create_image(x + (i * 30), y  + (30 * j), anchor=NW, image=ls[i]))
 
 
 
@@ -53,6 +52,7 @@ def left(e):
    canvas.move(img_1, x, y)
 
 def right(e):
+   #canvas.delete(img_1)
    x = 30
    y = 0
    canvas.move(img_1, x, y)
@@ -65,7 +65,6 @@ def up(e):
 def down(e):
    x = 0
    y = 30
-   canvas.create_image(-31, 585, anchor=NW, image=image_bot)
    canvas.move(img_1, x, y)
 
 #Bind the move function
