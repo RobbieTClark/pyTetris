@@ -10,6 +10,9 @@ Make a dialog box to pop up after tetris game finishes (or just have a box askin
 
 
 References:
+amazon.co.uk/Amazon-Video/b?ie=UTF8&node=3010085031
 https://www.tutorialspoint.com/how-to-move-an-image-in-tkinter-canvas-with-arrow-keys
 https://gamedevelopment.tutsplus.com/tutorials/implementing-tetris-clearing-lines--gamedev-1197
 https://design.tutsplus.com/articles/create-a-block-game-interface-in-illustrator--vector-5269?_ga=2.58598639.434084545.1664821124-1696426437.1664821124
+https://stackoverflow.com/questions/62951379/moving-tkinter-window
+https://gamedev.stackexchange.com/questions/17974/how-to-rotate-blocks-in-tetris?fbclid=IwAR02UapCoW-h3ahqKmYKhXErRimF9nL-5Ag3sEi2sA8KzOAjmGkLfaew6eM
