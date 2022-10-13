@@ -26,7 +26,7 @@ class L_Block(object):
    def __init__(self, canvas):
       self.c_rotation_matrix = np.array([[0,-1], [1, 0]]) 
       self.ac_rotation_matrix = np.array([[0, 1], [-1, 0]])
-      self.block_displacements = [np.array([[0],[-2]]), np.array([[-1],[-1]]), np.array([[0],[0]]), np.array([[1],[1]])]
+      self.block_displacements = [np.array([[2],[0]]), np.array([[1],[-1]]), np.array([[0],[0]]), np.array([[-1],[1]])]
       self.y = self.y_start
       self.block_positions = [
          [self.x_start+self.block_size*3, self.y_start-2*self.block_size],
@@ -48,14 +48,13 @@ class L_Block(object):
          self.blocks.append(Block("Blue", self.canvas, x, y))
    def rotate_clockwise(self):
       for i, block in enumerate(self.blocks):
-         xy = self.c_rotation_matrix.dot(self.block_displacements[i])
-         self.block_displacements[i] = xy
-         block.move(xy[0][0]*self.block_size, xy[1][0]*self.block_size)
+         block.move(self.block_displacements[i][0][0]*self.block_size, self.block_displacements[i][1][0]*self.block_size)
+         self.block_displacements[i] = self.c_rotation_matrix.dot(self.block_displacements[i])
+
    def rotate_anticlockwise(self):
       for i, block in enumerate(self.blocks):
-         xy = self.ac_rotation_matrix.dot(self.block_displacements[i])
-         self.block_displacements[i] = xy
-         block.move(xy[0][0]*self.block_size, xy[1][0]*self.block_size)
+         block.move(self.block_displacements[i][0][0]*self.block_size, self.block_displacements[i][1][0]*self.block_size)
+         self.block_displacements[i] = self.ac_rotation_matrix.dot(self.block_displacements[i])
 
 # image_1 = ImageTk.PhotoImage(Image.open('blocks_png/final/BlueBlock.png'))
 # img_1 = canvas.create_image(35, 36, anchor=NW, image=image_1)   
