@@ -24,7 +24,7 @@ class L_Block(object):
    x_start, y_start = 36, 36
    block_size = 39
    def __init__(self, canvas):
-      self.c_rotation_matrix = np.array([[0,-1], [1, 0]])
+      self.c_rotation_matrix = np.array([[0,-1], [1, 0]]) 
       self.ac_rotation_matrix = np.array([[0, 1], [-1, 0]])
       self.block_displacements = [np.array([[0],[-2]]), np.array([[-1],[-1]]), np.array([[0],[0]]), np.array([[1],[1]])]
       self.y = self.y_start
