@@ -134,6 +134,158 @@ class L_Block(object):
          self.block_displace_back[i] = self.ac_rotation_matrix.dot(self.block_displace_back[i])
          self.block_displace_forward[i] = self.ac_rotation_matrix.dot(self.block_displace_forward[i])
 
+class O_Block(object):
+   x_start, y_start = 36, 36
+   block_size = 39
+   def __init__(self, canvas):
+      self.c_rotation_matrix = np.array([[0,-1], [1, 0]]) 
+      self.ac_rotation_matrix = np.array([[0, 1], [-1, 0]])
+      self.block_displace_forward = [np.array([[0],[0]]), np.array([[0],[0]]), np.array([[0],[0]]), np.array([[0],[0]])]
+      self.block_displace_back = [np.array([[0],[0]]), np.array([[0],[0]]), np.array([[0],[0]]), np.array([[0],[0]])]
+      self.y = self.y_start
+      self.block_positions = [
+         [self.x_start+self.block_size*4, self.y_start-2*self.block_size],
+         [self.x_start+self.block_size*5, self.y_start-2*self.block_size],
+         [self.x_start+self.block_size*4, self.y_start-self.block_size],
+         [self.x_start+self.block_size*5, self.y_start-self.block_size]]
+      self.blocks = []
+      self.canvas = canvas
+      self.make_blocks()
+      self.rotateable = False
+   def move(self, x, y):
+      self.y += y
+      if self.y >= self.y_start + 2*self.block_size:
+         self.rotateable = True
+      for block in self.blocks:
+         block.move(x, y)
+   def make_blocks(self):
+      for x, y in self.block_positions:
+         self.blocks.append(Block("Blue", self.canvas, x, y))
+   def rotate_clockwise(self):
+      for i, block in enumerate(self.blocks):
+         block.move(self.block_displace_forward[i][0][0]*self.block_size, self.block_displace_forward[i][1][0]*self.block_size)
+         self.block_displace_forward[i] = self.c_rotation_matrix.dot(self.block_displace_forward[i])
+         self.block_displace_back[i] = self.c_rotation_matrix.dot(self.block_displace_back[i])
+   def rotate_anticlockwise(self):
+      for i, block in enumerate(self.blocks):
+         block.move(self.block_displace_back[i][0][0]*self.block_size, self.block_displace_back[i][1][0]*self.block_size)
+         self.block_displace_back[i] = self.ac_rotation_matrix.dot(self.block_displace_back[i])
+         self.block_displace_forward[i] = self.ac_rotation_matrix.dot(self.block_displace_forward[i])
+
+class S_Block(object):
+   x_start, y_start = 36, 36
+   block_size = 39
+   def __init__(self, canvas):
+      self.c_rotation_matrix = np.array([[0,-1], [1, 0]]) 
+      self.ac_rotation_matrix = np.array([[0, 1], [-1, 0]])
+      self.block_displace_forward = [np.array([[1],[1]]), np.array([[0],[2]]), np.array([[1],[-1]]), np.array([[0],[0]])]
+      self.block_displace_back = [np.array([[-1],[1]]), np.array([[-2],[0]]), np.array([[1],[1]]), np.array([[0],[0]])]
+      self.y = self.y_start
+      self.block_positions = [
+         [self.x_start+self.block_size*4, self.y_start-2*self.block_size],
+         [self.x_start+self.block_size*5, self.y_start-2*self.block_size],
+         [self.x_start+self.block_size*3, self.y_start-self.block_size],
+         [self.x_start+self.block_size*4, self.y_start-self.block_size]]
+      self.blocks = []
+      self.canvas = canvas
+      self.make_blocks()
+      self.rotateable = False
+   def move(self, x, y):
+      self.y += y
+      if self.y >= self.y_start + 2*self.block_size:
+         self.rotateable = True
+      for block in self.blocks:
+         block.move(x, y)
+   def make_blocks(self):
+      for x, y in self.block_positions:
+         self.blocks.append(Block("Blue", self.canvas, x, y))
+   def rotate_clockwise(self):
+      for i, block in enumerate(self.blocks):
+         block.move(self.block_displace_forward[i][0][0]*self.block_size, self.block_displace_forward[i][1][0]*self.block_size)
+         self.block_displace_forward[i] = self.c_rotation_matrix.dot(self.block_displace_forward[i])
+         self.block_displace_back[i] = self.c_rotation_matrix.dot(self.block_displace_back[i])
+   def rotate_anticlockwise(self):
+      for i, block in enumerate(self.blocks):
+         block.move(self.block_displace_back[i][0][0]*self.block_size, self.block_displace_back[i][1][0]*self.block_size)
+         self.block_displace_back[i] = self.ac_rotation_matrix.dot(self.block_displace_back[i])
+         self.block_displace_forward[i] = self.ac_rotation_matrix.dot(self.block_displace_forward[i])
+
+class T_Block(object):
+   x_start, y_start = 36, 36
+   block_size = 39
+   def __init__(self, canvas):
+      self.c_rotation_matrix = np.array([[0,-1], [1, 0]]) 
+      self.ac_rotation_matrix = np.array([[0, 1], [-1, 0]])
+      self.block_displace_forward = [np.array([[1],[1]]), np.array([[1],[-1]]), np.array([[0],[0]]), np.array([[-1],[1]])]
+      self.block_displace_back = [np.array([[-1],[1]]), np.array([[1],[1]]), np.array([[0],[0]]), np.array([[-1],[-1]])]
+      self.y = self.y_start
+      self.block_positions = [
+         [self.x_start+self.block_size*4, self.y_start-2*self.block_size],
+         [self.x_start+self.block_size*3, self.y_start-self.block_size],
+         [self.x_start+self.block_size*4, self.y_start-self.block_size],
+         [self.x_start+self.block_size*5, self.y_start-self.block_size]]
+      self.blocks = []
+      self.canvas = canvas
+      self.make_blocks()
+      self.rotateable = False
+   def move(self, x, y):
+      self.y += y
+      if self.y >= self.y_start + 2*self.block_size:
+         self.rotateable = True
+      for block in self.blocks:
+         block.move(x, y)
+   def make_blocks(self):
+      for x, y in self.block_positions:
+         self.blocks.append(Block("Blue", self.canvas, x, y))
+   def rotate_clockwise(self):
+      for i, block in enumerate(self.blocks):
+         block.move(self.block_displace_forward[i][0][0]*self.block_size, self.block_displace_forward[i][1][0]*self.block_size)
+         self.block_displace_forward[i] = self.c_rotation_matrix.dot(self.block_displace_forward[i])
+         self.block_displace_back[i] = self.c_rotation_matrix.dot(self.block_displace_back[i])
+   def rotate_anticlockwise(self):
+      for i, block in enumerate(self.blocks):
+         block.move(self.block_displace_back[i][0][0]*self.block_size, self.block_displace_back[i][1][0]*self.block_size)
+         self.block_displace_back[i] = self.ac_rotation_matrix.dot(self.block_displace_back[i])
+         self.block_displace_forward[i] = self.ac_rotation_matrix.dot(self.block_displace_forward[i])
+
+class Z_Block(object):
+   x_start, y_start = 36, 36
+   block_size = 39
+   def __init__(self, canvas):
+      self.c_rotation_matrix = np.array([[0,-1], [1, 0]]) 
+      self.ac_rotation_matrix = np.array([[0, 1], [-1, 0]])
+      self.block_displace_forward = [np.array([[2],[0]]), np.array([[1],[1]]), np.array([[0],[0]]), np.array([[-1],[1]])]
+      self.block_displace_back = [np.array([[0],[2]]), np.array([[-1],[1]]), np.array([[0],[0]]), np.array([[-1],[-1]])]
+      self.y = self.y_start
+      self.block_positions = [
+         [self.x_start+self.block_size*3, self.y_start-2*self.block_size],
+         [self.x_start+self.block_size*4, self.y_start-2*self.block_size],
+         [self.x_start+self.block_size*4, self.y_start-self.block_size],
+         [self.x_start+self.block_size*5, self.y_start-self.block_size]]
+      self.blocks = []
+      self.canvas = canvas
+      self.make_blocks()
+      self.rotateable = False
+   def move(self, x, y):
+      self.y += y
+      if self.y >= self.y_start + 2*self.block_size:
+         self.rotateable = True
+      for block in self.blocks:
+         block.move(x, y)
+   def make_blocks(self):
+      for x, y in self.block_positions:
+         self.blocks.append(Block("Blue", self.canvas, x, y))
+   def rotate_clockwise(self):
+      for i, block in enumerate(self.blocks):
+         block.move(self.block_displace_forward[i][0][0]*self.block_size, self.block_displace_forward[i][1][0]*self.block_size)
+         self.block_displace_forward[i] = self.c_rotation_matrix.dot(self.block_displace_forward[i])
+         self.block_displace_back[i] = self.c_rotation_matrix.dot(self.block_displace_back[i])
+   def rotate_anticlockwise(self):
+      for i, block in enumerate(self.blocks):
+         block.move(self.block_displace_back[i][0][0]*self.block_size, self.block_displace_back[i][1][0]*self.block_size)
+         self.block_displace_back[i] = self.ac_rotation_matrix.dot(self.block_displace_back[i])
+         self.block_displace_forward[i] = self.ac_rotation_matrix.dot(self.block_displace_forward[i])
+
 # image_1 = ImageTk.PhotoImage(Image.open('blocks_png/final/BlueBlock.png'))
 # img_1 = canvas.create_image(35, 36, anchor=NW, image=image_1)   
 
@@ -162,9 +314,14 @@ canvas.create_window(0, 0, anchor=NW, window=label)
 image_0 = ImageTk.PhotoImage(Image.open('board_png/final/tetris_board_removed_comp.png'))
 img_0 = canvas.create_image(0, 0, anchor=NW, image=image_0) #-20,-20
 
-jl_block = L_Block(canvas)
+#l_block = L_Block(canvas)
 #i_block = I_Block(canvas)
-j_block = J_Block(canvas)
+#j_block = J_Block(canvas)
+#o_block = O_Block(canvas)
+#s_block = S_Block(canvas)
+#t_block = T_Block(canvas)
+z_block = Z_Block(canvas)
+
 
 
 #txt_0 = canvas.create_text(100,100, text = "HELLO WORLD", fill = "white", font = ("Courier 15 bold"))
@@ -197,29 +354,29 @@ win.bind('<B1-Motion>', drag)
 def left(e):
    x = -39
    y = 0
-   j_block.move(x, y)
+   z_block.move(x, y)
 
 def right(e):
    #canvas.delete(img_1)
    x = 39
    y = 0
-   j_block.move(x, y)
+   z_block.move(x, y)
 
 def up(e):
    x = 0
    y = -39
-   j_block.move(x, y)
+   z_block.move(x, y)
 
 def down(e):
    x = 0
    y = 39
-   j_block.move(x, y)
+   z_block.move(x, y)
 
 def rotate_clockwise(e):
-   j_block.rotate_clockwise()
+   z_block.rotate_clockwise()
 
 def rotate_anticlockwise(e):
-   j_block.rotate_anticlockwise()
+   z_block.rotate_anticlockwise()
 
 #Bind the move function
 
